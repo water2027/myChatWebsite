@@ -186,16 +186,28 @@ ws.onmessage = (event) => {
 
 }
 
-const closeAside = () => {
-    isOpened.value = !isOpened.value
-    if (isOpened.value) {
-        aside.value.style.width = '0'
-        mainPage.value.style.width = '100%'
-        header.value.style.width = '90%'
+let closeAside = () => {
+    if (isMobile) {
+        isOpened.value = !isOpened.value
+        if (isOpened.value) {
+            aside.value.style.width = '0'
+            header.value.style.width = '90%'
+        } else {
+            aside.value.style.width = '80%'
+        }
+
     } else {
-        aside.value.style.width = '17%'
-        mainPage.value.style.width = '83%'
-        header.value.style.width = '100%'
+        isOpened.value = !isOpened.value
+        if (isOpened.value) {
+            aside.value.style.width = '0'
+            mainPage.value.style.width = '100%'
+            header.value.style.width = '90%'
+        } else {
+            aside.value.style.width = '17%'
+            mainPage.value.style.width = '83%'
+            header.value.style.width = '100%'
+        }
+
     }
 }
 const markedContent = (content) => {
@@ -312,6 +324,10 @@ const updatePrompt = (id) => {
         curPrompt.content = newContent
     }
     localStorage.setItem('prompts', JSON.stringify(prompts.value))
+}
+
+const isMobile = () => {
+    return window.innerWidth <= 768
 }
 
 onMounted(() => {
@@ -546,5 +562,44 @@ header div {
 
 .blog img {
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .left {
+        width: 0;
+        z-index: 998;
+    }
+
+    header {
+        position: absolute;
+        top: 3%;
+        width: 50%;
+    }
+
+    .right {
+        position: absolute;
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .user{
+        margin-right: 10%;
+    }
+
+    .assistant{
+
+        margin-left: -20%;
+    }
+
+    .msgInput {
+        width: 100%;
+    }
+
+    .sendButton {
+        width: 10%;
+    }
+
 }
 </style>
