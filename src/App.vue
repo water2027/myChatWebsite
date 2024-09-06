@@ -191,11 +191,10 @@ let closeAside = () => {
         isOpened.value = !isOpened.value
         if (isOpened.value) {
             aside.value.style.width = '0'
-            header.value.style.width = '90%'
         } else {
             aside.value.style.width = '80%'
-        }
 
+        }
     } else {
         isOpened.value = !isOpened.value
         if (isOpened.value) {
@@ -339,267 +338,468 @@ onMounted(() => {
 
 </script>
 <style scoped>
-.left {
-    display: flex;
-    flex-direction: column;
-    background-color: #1f1f1f;
-    color: #fff;
-    width: 17%;
-    height: 100%;
-    transition: width 0.5s;
-}
-
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
-}
-
-.asideButton {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    color: rgba(255, 255, 255, 0.72);
-    z-index: 999;
-}
-
-.asideButton:hover {
-    color: #fff;
-    background-color: #1f1f1f;
-    border-radius: 10px;
-}
-
-.selection {
-    height: 100%;
-    overflow-y: scroll;
-}
-
-.selection::-webkit-scrollbar {
-    width: 15px;
-}
-
-.selection::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.selection::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-}
-
-.selection::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-.prompt,
-.bottom {
-    padding: 0.5rem;
-}
-
-.left ul {
-    list-style: none;
-    padding: 0;
-}
-
-.left ul li {
-    margin-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.left ul li:hover {
-    background-color: #ffffff61;
-    border-radius: 5px;
-}
-
-.selection li {
-    display: flex;
-    justify-content: space-between;
-}
-
-.selection li button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.72);
-}
-
-.chatName {
-    width: 80%;
-    height: 100%;
-}
-
-.right {
-    background-color: #2f2f2f;
-    color: #fff;
-    width: 83%;
-    height: 100%;
-    transition: width 0.5s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-header {
-    width: 100%;
-    height: 3rem;
-    margin-right: 0;
-    display: flex;
-    flex-direction: row;
-    transition: width 0.5s;
-    margin-top: 1%;
-    margin-left: 1%;
-}
-
-header select {
-    width: 17%;
-    height: 2rem;
-    background-color: #1f1f1f70;
-    color: #ffffff89;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    text-align: center;
-    padding-right: 1.5rem;
-    position: relative;
-}
-
-header select option {
-    background-color: #1f1f1f70;
-    color: #ffffff89;
-    border: none;
-}
-
-header select:hover {
-    background-color: #1f1f1f;
-    color: #fff;
-}
-
-header div {
-    position: absolute;
-    right: 1%;
-    top: 1.5%;
-    overflow: hidden;
-    border-radius: 100%;
-}
-
-.msgInput {
-    width: 50%;
-    height: 3rem;
-    position: absolute;
-    bottom: 4%;
-}
-
-.msgInput input {
-    width: 100%;
-    height: 100%;
-    background-color: #1f1f1f70;
-    color: #ffffff89;
-    border: none;
-    border-radius: 5px;
-    padding-left: 1rem;
-    font-size: 1.5rem;
-}
-
-.allChatContent {
-    width: 100%;
-    min-width: 100%;
-    height: 100%;
-    max-height: 80%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-}
-
-.chatContent {
-    height: auto;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    margin-left: 2rem;
-
-}
-
-.user,
-.assistant {
-    font-size: 1.1rem;
-    border-radius: 10px;
-}
-
-.user {
-    max-width: 50%;
-    background-color: #00000061;
-    align-self: flex-end;
-    margin-right: 15rem;
-}
-
-.assistant {
-    max-width: 50%;
-    align-self: flex-start;
-    margin-left: 15rem;
-}
-
-.sendButton {
-    background-color: rgba(255, 255, 255, 0.725);
-    border: none;
-    border-radius: 100%;
-    cursor: pointer;
-    position: absolute;
-    right: 1%;
-    top: 1%;
-    height: 100%;
-    width: 6%;
-}
-
-.blog img {
-    cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     .left {
-        width: 0;
-        z-index: 998;
+        display: flex;
+        flex-direction: column;
+        background-color: #1f1f1f;
+        color: #fff;
+        width: 17%;
+        height: 100%;
+        transition: width 0.5s;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .asideButton {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        color: rgba(255, 255, 255, 0.72);
+        z-index: 999;
+    }
+
+    .asideButton:hover {
+        color: #fff;
+        background-color: #1f1f1f;
+        border-radius: 10px;
+    }
+
+    .selection {
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .selection::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    .selection::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .selection::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+
+    .selection::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .prompt,
+    .bottom {
+        padding: 0.5rem;
+    }
+
+    .left ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .left ul li {
+        margin-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .left ul li:hover {
+        background-color: #ffffff61;
+        border-radius: 5px;
+    }
+
+    .selection li {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .selection li button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    .chatName {
+        width: 80%;
+        height: 100%;
+    }
+
+    .right {
+        background-color: #2f2f2f;
+        color: #fff;
+        width: 83%;
+        height: 100%;
+        transition: width 0.5s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     header {
+        width: 100%;
+        height: 3rem;
+        margin-right: 0;
+        display: flex;
+        flex-direction: row;
+        transition: width 0.5s;
+        margin-top: 1%;
+        margin-left: 1%;
+    }
+
+    header select {
+        width: 17%;
+        height: 2rem;
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        text-align: center;
+        padding-right: 1.5rem;
+        position: relative;
+    }
+
+    header select option {
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+        border: none;
+    }
+
+    header select:hover {
+        background-color: #1f1f1f;
+        color: #fff;
+    }
+
+    header div {
         position: absolute;
-        top: 3%;
+        right: 1%;
+        top: 1.5%;
+        overflow: hidden;
+        border-radius: 100%;
+    }
+
+    .msgInput {
         width: 50%;
+        height: 3rem;
+        position: absolute;
+        bottom: 4%;
+    }
+
+    .msgInput input {
+        width: 100%;
+        height: 100%;
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+        border: none;
+        border-radius: 5px;
+        padding-left: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .allChatContent {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        max-height: 80%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+
+    .chatContent {
+        height: auto;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        margin-left: 2rem;
+
+    }
+
+    .user,
+    .assistant {
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
+    .user {
+        max-width: 50%;
+        background-color: #00000061;
+        align-self: flex-end;
+        margin-right: 15rem;
+    }
+
+    .assistant {
+        max-width: 50%;
+        align-self: flex-start;
+        margin-left: 15rem;
+    }
+
+    .sendButton {
+        background-color: rgba(255, 255, 255, 0.725);
+        border: none;
+        border-radius: 100%;
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        height: 100%;
+        width: 6%;
+    }
+
+    .blog img {
+        cursor: pointer;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .left {
+        display: flex;
+        flex-direction: column;
+        background-color: #1f1f1f;
+        color: #fff;
+        width: 0;
+        z-index: 998;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        transition: width 0.5s;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .asideButton {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        color: rgba(255, 255, 255, 0.72);
+        z-index: 999;
+    }
+
+    .asideButton:hover {
+        color: #fff;
+        background-color: #1f1f1f;
+        border-radius: 10px;
+    }
+
+    .selection {
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .selection::-webkit-scrollbar {
+        width: 15px;
+    }
+
+    .selection::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .selection::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+
+    .selection::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    .prompt,
+    .bottom {
+        padding: 0.5rem;
+    }
+
+    .left ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .left ul li {
+        margin-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        white-space: nowrap;
+        cursor: pointer;
+    }
+
+    .left ul li:hover {
+        background-color: #ffffff61;
+        border-radius: 5px;
+    }
+
+    .selection li {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .selection li button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.72);
+    }
+
+    .chatName {
+        width: 80%;
+        height: 100%;
     }
 
     .right {
         position: absolute;
+        background-color: #2f2f2f;
+        color: #fff;
         margin: 0;
+        padding: 0;
+        z-index: 0;
         width: 100%;
+        height: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
     }
-    .user{
-        margin-right: 10%;
+
+    header {
+        width: 100%;
+        height: 3rem;
+        margin-right: 0;
+        display: flex;
+        flex-direction: row;
+        transition: width 0.5s;
+        margin-top: 1%;
+        margin-left: 1%;
     }
 
-    .assistant{
+    header select {
+        position: absolute;
+        z-index: 990;
+        width: 50%;
+        height: 2rem;
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.5rem;
+        text-align: center;
+        padding-right: 1.5rem;
+        top: 1.5%;
+        left: 22%;
+    }
 
-        margin-left: -20%;
+    header select option {
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+        border: none;
+    }
+
+    header select:hover {
+        background-color: #1f1f1f;
+        color: #fff;
+    }
+
+    header div {
+        position: absolute;
+        right: 1%;
+        top: 1.5%;
+        overflow: hidden;
+        border-radius: 100%;
+    }
+
+    .blog img {
+        cursor: pointer;
     }
 
     .msgInput {
         width: 100%;
+        height: 3rem;
+        position: absolute;
+        bottom: 4%;
+    }
+
+    .msgInput input {
+        width: 100%;
+        height: 100%;
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+        border: none;
+        border-radius: 5px;
+        padding-left: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .allChatContent {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        max-height: 80%;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+
+    .chatContent {
+        height: auto;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        margin-left: 2rem;
+
+    }
+
+    .user,
+    .assistant {
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
+    .user {
+        position: absolute;
+        max-width: 50%;
+        background-color: #00000061;
+        right: 15%;
+    }
+
+    .assistant {
+        position: absolute;
+        max-width: 50%;
+        left: 15%;
     }
 
     .sendButton {
-        width: 10%;
+        background-color: rgba(255, 255, 255, 0.725);
+        border: none;
+        border-radius: 100%;
+        cursor: pointer;
+        position: absolute;
+        right: 1%;
+        top: 1%;
+        height: 100%;
+        width: 13%;
     }
-
 }
 </style>
