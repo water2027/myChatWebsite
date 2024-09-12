@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "chat": "file:",
     "marked": "^14.1.1",
     "vue": "^3.4.29"
   },
