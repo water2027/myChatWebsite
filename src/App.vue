@@ -21,9 +21,31 @@
         <div class="selection">
             <div class="prompt">
                 <ul>
+                    <li>
+                        <div class="chatName">修改ai模型</div>
+                        <button @click="modelButtonIsShow = !modelButtonIsShow" type="button" id="radix-:rd8:"
+                            aria-haspopup="menu" aria-expanded="false" data-state="closed">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="icon-md">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M3 12C3 10.8954 3.89543 10 5 10C6.10457 10 7 10.8954 7 12C7 13.1046 6.10457 14 5 14C3.89543 14 3 13.1046 3 12ZM10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12ZM17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </button>
+                        <div class="moreButton" v-if="modelButtonIsShow==true">
+                            <ul>
+                                <li @click="addModel">增加模型</li>                                
+                                <li @click="delModel">删除模型</li>
+                            </ul>
+                        </div>                        
+                    </li>
+                </ul>
+            </div>
+            <div class="prompt">
+                <ul>
                     <li v-for="prompt in prompts" :key="prompt.id">
                         <div class="chatName" @click="usePrompt(prompt.id)">{{ prompt.name }}</div>
-                        <button @click="morePromptButtonIsShowed = prompt.id" type="button" id="radix-:rd8:"
+                        <button @click="morePromptButtonIsShowed = morePromptButtonIsShowed==prompt.id?-1:prompt.id" type="button" id="radix-:rd8:"
                             aria-haspopup="menu" aria-expanded="false" data-state="closed">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" class="icon-md">
@@ -69,10 +91,7 @@
     <div class="right" ref="mainPage">
         <header ref="header">
             <select name="model" id="model" v-model="model">
-                <option value="chatgpt-4o-latest">chatgpt-4o</option>
-                <option value="claude-3-5-sonnet-20240620">claude-3-5-sonnet</option>
-                <option value="gpt-4o-mini-2024-07-18">gpt-4o-mini</option>
-                <option value="gpt-test">gpt-test</option>
+                <option v-for="model in models" :key="model" :value="model">{{ model }}</option>
             </select>
             <div class="blog">
                 <img title="前往我的博客" src="../src/assets/water.png" @click="goToBlog" />
@@ -109,7 +128,7 @@ const isOpened = ref(false)
 const aside = ref(null)
 const mainPage = ref(null)
 const header = ref(null)
-const model = ref('claude-3-5-sonnet-20240620')
+const model = ref('chatgpt-4o-latest')
 const moreButtonIsShowed = ref(-1)
 const chatHistory = ref([])
 const newText = ref('')
@@ -121,6 +140,14 @@ const currentChat = ref({
 const id = ref(0)
 const inputMsg = ref(null)
 const isFirst = ref(true)
+const models = ref([
+    'chatgpt-4o-latest',
+    'claude-3-5-sonnet-20240620',
+    'gpt-4o-mini-2024-07-18',
+    'gpt-test',
+    "o1-preview",
+    "o1-mini"
+])
 const prompts = ref([
     {
         id: 0,
@@ -176,13 +203,12 @@ const prompts = ref([
     }
 ])
 const morePromptButtonIsShowed = ref(-1)
-
 const goToBlog = () => {
     window.open('https://watering.top')
 }
+const modelButtonIsShow = ref(false)
 
 const ws = ref(null)
-
 const initws = () => {
     ws.value = new WebSocket('wss://watering.top/ws')
     ws.value.onopen = () => {
@@ -208,6 +234,25 @@ const initws = () => {
         }, 1000)
     }
 }
+
+const addModel = () => {
+    let name = prompt('请输入模型名称')
+    if (name) {
+        models.value.push(name)
+        localStorage.setItem('models', JSON.stringify(models.value))
+    }
+}
+const delModel = () => {
+    let name = prompt('请输入要删除的模型名称')
+    if (name) {
+        let index = models.value.findIndex((model) => model === name)
+        if (index !== -1) {
+            models.value.splice(index, 1)
+            localStorage.setItem('models', JSON.stringify(models.value))
+        }
+    }
+}
+
 
 const closeAside = () => {
     if (isMobile()) {
@@ -363,6 +408,7 @@ onMounted(() => {
     prompts.value = localStorage.getItem('prompts')
         ? JSON.parse(localStorage.getItem('prompts'))
         : prompts.value
+    models.value = localStorage.getItem('models')?JSON.parse(localStorage.getItem('models')):models.value
     createNewChat()
     initws()
 })
