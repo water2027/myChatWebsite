@@ -128,7 +128,7 @@ const isOpened = ref(false)
 const aside = ref(null)
 const mainPage = ref(null)
 const header = ref(null)
-const model = ref('chatgpt-4o-latest')
+const model = ref('gpt-4o-2024-08-06')
 const moreButtonIsShowed = ref(-1)
 const chatHistory = ref([])
 const newText = ref('')
@@ -141,7 +141,7 @@ const id = ref(0)
 const inputMsg = ref(null)
 const isFirst = ref(true)
 const models = ref([
-    'chatgpt-4o-latest',
+    'gpt-4o-2024-08-06',
     'claude-3-5-sonnet-20240620',
     'gpt-4o-mini-2024-07-18',
     'gpt-test',
