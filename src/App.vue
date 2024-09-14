@@ -216,6 +216,11 @@ const initws = () => {
     }
     ws.value.onmessage = (event) => {
         let res = JSON.parse(event.data)
+        if(res.error){
+            // console.log(event.error)
+            alert(res.error)
+            return
+        }
         newText.value += res.content ? res.content : ''
         if (!res.content && newText.value) {
             currentChat.value.content.push({
@@ -252,7 +257,6 @@ const delModel = () => {
         }
     }
 }
-
 
 const closeAside = () => {
     if (isMobile()) {
