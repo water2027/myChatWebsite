@@ -1,5 +1,5 @@
 <template>
-    <div class="left" ref="aside">
+    <div class="left" ref="aside" >
         <div class="top">
             <button @click="closeAside" title="关闭边栏" class="asideButton">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -32,12 +32,12 @@
                                     fill="currentColor"></path>
                             </svg>
                         </button>
-                        <div class="moreButton" v-if="modelButtonIsShow==true">
+                        <div class="moreButton" v-if="modelButtonIsShow == true">
                             <ul>
-                                <li @click="addModel">增加模型</li>                                
+                                <li @click="addModel">增加模型</li>
                                 <li @click="delModel">删除模型</li>
                             </ul>
-                        </div>                        
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -45,8 +45,9 @@
                 <ul>
                     <li v-for="prompt in prompts" :key="prompt.id">
                         <div class="chatName" @click="usePrompt(prompt.id)">{{ prompt.name }}</div>
-                        <button @click="morePromptButtonIsShowed = morePromptButtonIsShowed==prompt.id?-1:prompt.id" type="button" id="radix-:rd8:"
-                            aria-haspopup="menu" aria-expanded="false" data-state="closed">
+                        <button @click="morePromptButtonIsShowed = morePromptButtonIsShowed == prompt.id ? -1 : prompt.id"
+                            type="button" id="radix-:rd8:" aria-haspopup="menu" aria-expanded="false"
+                            data-state="closed">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" class="icon-md">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -97,7 +98,7 @@
                 <img title="前往我的博客" src="../src/assets/water.png" @click="goToBlog" />
             </div>
         </header>
-        <div class="allChatContent">
+        <div class="allChatContent" @click="hello">
             <div v-for="(chatContent, index) in currentChat.content" :key="index" class="chatContent">
                 <div v-if="chatContent.role === 'user'" class="user">{{ chatContent.content }}</div>
                 <div v-else class="assistant" v-html="markedContent(chatContent.content)"></div>
@@ -216,7 +217,7 @@ const initws = () => {
     }
     ws.value.onmessage = (event) => {
         let res = JSON.parse(event.data)
-        if(res.error){
+        if (res.error) {
             // console.log(event.error)
             alert(res.error)
             return
@@ -257,7 +258,6 @@ const delModel = () => {
         }
     }
 }
-
 const closeAside = () => {
     if (isMobile()) {
         isOpened.value = !isOpened.value
@@ -404,6 +404,40 @@ const isMobile = () => {
     return window.innerWidth <= 768
 }
 
+const createHeart = (e) => {
+    let x = e.clientX;
+    let y = e.clientY;
+    let heart = document.createElement('b');
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
+    heart.innerHTML = '复制成功';
+    document.body.appendChild(heart);
+    heart.animate([
+        { top: `${y}px`, opacity: 1 },
+        { top: `${y - 100}px`, opacity: 0 }
+    ], {
+        duration: 1500,
+        easing: 'ease'
+    });
+    setTimeout(() => {
+        heart.remove();
+    }, 1000);
+};
+
+const hello = (event) => {
+    //如果点到的是pre标签，并且他有code子元素，复制他的内容
+    if(event.target.tagName === 'PRE'&&event.target.children[0].tagName === 'CODE'){
+        let range = document.createRange()
+        range.selectNode(event.target.children[0])
+        let selection = window.getSelection()
+        selection.removeAllRanges()
+        selection.addRange(range)
+        document.execCommand('copy')
+        selection.removeAllRanges()
+        createHeart(event)
+    }
+}
+
 onMounted(() => {
     chatHistory.value = localStorage.getItem('chatHistory')
         ? JSON.parse(localStorage.getItem('chatHistory'))
@@ -412,7 +446,7 @@ onMounted(() => {
     prompts.value = localStorage.getItem('prompts')
         ? JSON.parse(localStorage.getItem('prompts'))
         : prompts.value
-    models.value = localStorage.getItem('models')?JSON.parse(localStorage.getItem('models')):models.value
+    models.value = localStorage.getItem('models') ? JSON.parse(localStorage.getItem('models')) : models.value
     createNewChat()
     initws()
 })
@@ -642,6 +676,8 @@ onMounted(() => {
     .blog img {
         cursor: pointer;
     }
+
+
 }
 
 @media screen and (max-width: 768px) {
@@ -879,3 +915,5 @@ onMounted(() => {
     }
 }
 </style>
+
+
