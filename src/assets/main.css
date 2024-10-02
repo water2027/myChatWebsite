@@ -49,7 +49,7 @@ pre{
   pointer-events: none;
 }
 pre::before{
-  content: '复制';
+  content: "复制";
   display: block;
   width: 50px;
   height: 25px;
