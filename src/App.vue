@@ -453,11 +453,11 @@ const sendMsgToService = () => {
                 messages: currentChat.value.content
             })
         })
-            .then((res) => res.json())
+            .then((res) => res.text())
             .then((res) => {
                 currentChat.value.content.push({
                     role: 'assistant',
-                    content: res.content
+                    content: res
                 })
                 localStorage.setItem('chatHistory', JSON.stringify(chatHistory.value))
             })
