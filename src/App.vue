@@ -450,7 +450,7 @@ const sendMsgToService = () => {
             },
             body: JSON.stringify({
                 model: model.value,
-                content: currentChat.value.content
+                messages: currentChat.value.content
             })
         })
             .then((res) => res.json())
