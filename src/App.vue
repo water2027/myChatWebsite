@@ -182,7 +182,7 @@
             </div>
         </div>
         <div class="msgInput">
-            <input
+            <textarea
                 placeholder="向AI发送信息，回车发送"
                 type="text"
                 ref="inputMsg"
@@ -566,6 +566,16 @@ onMounted(() => {
 })
 </script>
 <style scoped>
+    textarea {
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        padding: 1rem;
+        padding-bottom: 0.5rem;
+        font-size: 1.5rem;
+        background-color: #1f1f1f70;
+        color: #ffffff89;
+    }
 @media screen and (min-width: 768px) {
     .left {
         display: flex;
