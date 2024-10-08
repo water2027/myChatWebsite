@@ -1,6 +1,6 @@
 {
-    "name": "water's blog",
-    "short_name": "blog",
+    "name": "water's chatwebsite",
+    "short_name": "chat",
     "scope": "/",
     "start_url": "/",
     "display": "standalone",
